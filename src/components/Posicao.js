@@ -9,12 +9,15 @@ class Posicao extends React.Component {
         }
     }
     jogar(valor) {
+        if (this.state.valor !== '')
+            throw new Error('Valor inválido');
+
         this.setState((state) => ({ valor }))
     }
 
     render() {
         return (
-            <div className="Posicao" onClick={this.props.onClick}>{this.state.valor}</div>
+            <div className="Posicao" onClick={(e) => this.props.onClick(e, this)}>{this.state.valor}</div>
         )
     }
 }

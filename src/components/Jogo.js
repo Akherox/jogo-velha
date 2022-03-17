@@ -11,15 +11,17 @@ class Jogo extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e) {
-        console.log(e, this.proximoJogador)
-
-        this.setState((state) => ({ proximoJogador: state.proximoJogador === 'X' ? 'O' : 'X' }))
+    handleClick(e, posicao) {
+        try {
+            posicao.jogar(this.state.proximoJogador)
+            this.setState((state) => ({ proximoJogador: state.proximoJogador === 'X' ? 'O' : 'X' }))
+        }
+        catch (e) {}
     }
 
     render() {
         return (
-            <div class="Jogo">
+            <div className="Jogo">
                 <Posicao linha="0" coluna="0" onClick={this.handleClick} />
                 <Posicao linha="0" coluna="1" onClick={this.handleClick} />
                 <Posicao linha="0" coluna="2" onClick={this.handleClick} />
