@@ -27,7 +27,7 @@ class Jogo extends React.Component {
 
             this.verificarmosGanhador()
 
-            this.setState((state) => ({ proximoJogador: state.proximoJogador === 'X' ? 'O' : 'X', dados, posicaoLivre: state.posicaoLivre--, }))
+            this.setState((state) => ({ proximoJogador: state.proximoJogador === 'X' ? 'O' : 'X', posicaoLivre: state.posicaoLivre--, dados, }))
         }
         catch (e) { }
     }
@@ -36,7 +36,7 @@ class Jogo extends React.Component {
         if (this.verificarJogador('X')) {
             console.log('X ganhou')
         }
-        else if (this.verificarJogador('0')) {
+        else if (this.verificarJogador('O')) {
             console.log('0 ganhou')
         }
         else if (this.state.posicaoLivre === 0) {
@@ -45,40 +45,43 @@ class Jogo extends React.Component {
     }
     verificarJogador(jogador) {
         for (let l = 0; l < 3; l++) {
-            if (this.verificarmosLinha(jogador, l)) {
+            if (this.verificarLinha(jogador, l)) {
                 return true;
             }
         }
         for (let c = 0; c < 3; c++) {
-            if (this.verificarmosLinha(jogador, c)) {
+            if (this.verificarColuna(jogador, c)) {
                 return true;
             }
         }
         return false;
     }
 
-    verificarmosLinha(jogador, linha) {
+    verificarLinha(jogador, linha) {
         for (let c = 0; c < 3; c++) {
             if (this.state.dados[linha][c] !== jogador) {
-                return true;
+                return false;
             }
         }
+        return true;
     }
 
-    verificarmosColuna(jogador, coluna) {
+    verificarColuna(jogador, coluna) {
         for (let l = 0; l < 3; l++) {
             if (this.state.dados[l][coluna] !== jogador) {
-                return true;
+                return false;
             }
         }
+        return true;
     }
 
-    verificarmosDiagonal(jogador, diagonal) {
+    verificarDiagonal(jogador, diagonal) {
         for (let d = 0; d < 3; d++) {
             if (this.state.dados[d][diagonal] !== jogador) {
-                return true;
+                return false;
             }
         }
+        return true;
     }
 
 
